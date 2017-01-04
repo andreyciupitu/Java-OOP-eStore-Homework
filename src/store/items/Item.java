@@ -1,12 +1,12 @@
 package store.items;
 
-public class Item {
+public class Item{
 	private String name;
 	private Integer id;
 	private Double price;
 	
 	public Item(){
-		this.setName(null);
+		this.setName("");
 		this.setId(0);
 		this.setPrice(0.0);
 	}
@@ -17,27 +17,28 @@ public class Item {
 		this.setPrice(price);
 	}
 
-	public String getName() {
+	/* GETTERS & SETTERS */
+	public String getName(){
 		return name;
 	}
 
-	public void setName(String name) {
+	public void setName(String name){
 		this.name = name;
 	}
 
-	public Integer getId() {
+	public Integer getId(){
 		return id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(Integer id){
 		this.id = id;
 	}
 
-	public Double getPrice() {
+	public Double getPrice(){
 		return price;
 	}
 
-	public void setPrice(Double price) {
+	public void setPrice(Double price){
 		this.price = price;
 	}
 }
