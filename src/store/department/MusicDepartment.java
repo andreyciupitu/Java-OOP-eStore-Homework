@@ -2,8 +2,8 @@ package store.department;
 
 import store.items.ShoppingCart;
 
-public class BookDepartment extends Department{
-	public BookDepartment(DepartmentBuilder builder){
+public class MusicDepartment extends Department{
+	public MusicDepartment(DepartmentBuilder builder){
 		super(builder);
 	}
 

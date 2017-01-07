@@ -1,22 +1,24 @@
 package store;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+
 import store.department.*;
 import store.items.*;
 
 public class Store{
 	private static Store store = null;
 	private String name;
-	private ArrayList<Customer> customers;
-	private ArrayList<Department> departments;
+	private HashMap<String, Customer> customers;
+	private HashMap<Integer, Department> departments;
 	
 	private Store(){
 		this.name = "";
-		this.customers = new ArrayList<Customer>();
-		this.departments = new ArrayList<Department>();
+		this.customers = new HashMap<String, Customer>();
+		this.departments = new HashMap<Integer, Department>();
 	}
 	
-	/* GETTERS AND SETTERS */
+	/* GETTERS & SETTERS */
 	public String getName(){
 		return name;
 	}
@@ -32,17 +34,17 @@ public class Store{
 		return store;
 	}
 
-	public ArrayList<Customer> getCustomers(){
+	public HashMap<String, Customer> getCustomers(){
 		return customers;
 	}
 	
-	public ArrayList<Department> getDepartments(){
+	public HashMap<Integer, Department> getDepartments(){
 		return departments;
 	}
 	
 	/* Adds a new customer to the store */
 	public void enter(Customer c){
-		customers.add(c);
+		customers.put(c.getName(), c);
 	}
 	
 	/* Removes a customer from the store */
@@ -52,15 +54,12 @@ public class Store{
 	
 	/* Adds a new department */
 	public void addDepartment(Department d){
-		departments.add(d);
+		departments.put(d.getId(), d);
 	}
 	
 	/* Finds a department by ID */
 	public Department getDepartment(Integer x){
-		for (Department d : departments)
-			if (d.getId() == x)
-				return d;
-		return null;
+		return departments.get(x);
 	}
 	
 	/* Creates a ShoppingCart */

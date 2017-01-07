@@ -1,7 +1,9 @@
 package store;
 
 import java.util.ArrayList;
+
 import store.items.*;
+import store.interfaces.Observer;
 
 public class Customer implements Observer{
 	private String name;
@@ -37,5 +39,20 @@ public class Customer implements Observer{
 	/* From the Observer interface */
 	public void update(Notification n){
 		notifications.add(n);
+		Notification.NotificationType type = n.getType();
+		switch(type){
+			case ADD:
+				break;
+			case REMOVE:
+				wlist.remove(wlist.findItem(n.getItemId()));
+				cart.remove(cart.findItem(n.getItemId()));
+				break;
+			case MODIFY:
+				Store store = Store.getInstance();
+				Item changedItem = store.getDepartment(n.getDepartmentId()).getItems().get(n.getItemId());
+				wlist.set(wlist.findItem(n.getItemId()), changedItem);
+				cart.set(cart.findItem(n.getItemId()), changedItem);
+				break;
+		}
 	}
 }
