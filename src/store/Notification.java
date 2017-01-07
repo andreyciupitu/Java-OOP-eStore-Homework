@@ -19,19 +19,23 @@ public class Notification{
 		this.itemId = itemId;
 	}
 
-	public Date getDate() {
+	public Date getDate(){
 		return date;
 	}
 	
-	public NotificationType getType() {
+	public NotificationType getType(){
 		return type;
 	}
 
-	public Integer getDepartmentId() {
+	public Integer getDepartmentId(){
 		return departmentId;
 	}
 
-	public Integer getItemId() {
+	public Integer getItemId(){
 		return itemId;
+	}
+	
+	public String toString(){
+		return type.toString() + ";" + itemId + ";" + departmentId;
 	}
 }

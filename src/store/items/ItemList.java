@@ -119,6 +119,7 @@ public abstract class ItemList{
 		}
 
 		public void set(E arg0){
+			length--;
 			remove();
 			add(arg0);
 		}
@@ -173,13 +174,16 @@ public abstract class ItemList{
 	
 	/* Returns the item at the INDEX position */
 	public Item getItem(int index){
-		return getNode(index).getItem();
+		Node<Item> node = getNode(index);
+		if (node == null)
+			return null;
+		return node.getItem();
 	}
 	
 	/* Returns the node at the INDEX position */
 	public Node<Item> getNode(int index){
 		Node<Item> aux = head.getNext();
-		if (index > length)
+		if ((index > length) || (index < 0))
 			return null;
 		for (int i = 0; i < index; i++)
 			aux = aux.getNext();
@@ -234,6 +238,9 @@ public abstract class ItemList{
 	
 	/* Removes an Item from the list */
 	public boolean remove(Item item){
+		if (item == null)
+			return false;
+		length--;
 		ListIterator<Item> it = listIterator();
 		while (it.hasNext())
 			if (it.next().equals(item)){
@@ -283,6 +290,7 @@ public abstract class ItemList{
 				it.set(newItem);
 				return;
 			}
+			it.next();
 		}
 	}
 	
@@ -310,12 +318,13 @@ public abstract class ItemList{
 	public String toString(){
 		ListIterator<Item> it = listIterator();
 		StringBuilder s = new StringBuilder("[");
+		if (length == 0)
+			return s.append("]").toString();
 		while (it.hasNext())
-			if (it.nextIndex() == length)
-				s.append("]");
+			if (it.nextIndex() == length - 1)
+				s.append(it.next() + "]");
 			else
 				s.append(it.next() + ", ");
-		s.append("]");
 		return s.toString();
 	}
 }

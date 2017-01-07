@@ -1,7 +1,7 @@
 package store;
 
-import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 
 import store.department.*;
 import store.items.*;
@@ -60,6 +60,14 @@ public class Store{
 	/* Finds a department by ID */
 	public Department getDepartment(Integer x){
 		return departments.get(x);
+	}
+	
+	/* Finds an item in the store by ID */
+	public Item getItem(int itemId){
+		for (Map.Entry<Integer, Department> d : departments.entrySet())
+			if (d.getValue().getItems().get(itemId) != null)
+				return d.getValue().getItems().get(itemId);
+		return null;
 	}
 	
 	/* Creates a ShoppingCart */

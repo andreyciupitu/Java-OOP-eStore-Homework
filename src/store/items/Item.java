@@ -65,4 +65,8 @@ public class Item{
 	public String toString(){
 		return name + ";" + id.toString() + ";" + price.toString();
 	}
+	
+	public Item clone(){
+		return new Item(this.name, this.id, this.price, this.departmentId);
+	}
 }

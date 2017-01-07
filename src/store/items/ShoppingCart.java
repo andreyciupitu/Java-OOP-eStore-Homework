@@ -106,7 +106,7 @@ public class ShoppingCart extends ItemList implements Visitor{
 				min = entry.getValue().getPrice();
 		
 		/* Applies discount if the criteria is met */
-		if (min < moneyLeft){
+		if (min > moneyLeft){
 			ListIterator<Item> it = listIterator();
 			while (it.hasNext()){
 				Item item = it.next();
@@ -126,7 +126,7 @@ public class ShoppingCart extends ItemList implements Visitor{
 		
 		/*Finds the most expensive Video item */
 		for (Map.Entry<Integer, Item> entry : d.getItems().entrySet())
-			if (entry.getValue().getPrice() < max)
+			if (entry.getValue().getPrice() > max)
 				max = entry.getValue().getPrice();
 		
 		/* Finds the total price of the Video items
@@ -137,6 +137,8 @@ public class ShoppingCart extends ItemList implements Visitor{
 			if (item.getDepartmentId().equals(d.getId()))
 				discount += item.getPrice();
 		}
+		System.out.println(max);
+		System.out.println(discount);
 		
 		/* Applies discount if the criteria is met */
 		if (discount > max){
@@ -151,7 +153,7 @@ public class ShoppingCart extends ItemList implements Visitor{
 		}
 		
 		/* Calculates the remaining budget */
-		budget *= 0.95;
+		budget *= 1.05;
 		moneyLeft = budget - getTotalPrice();	
 	}
 }
