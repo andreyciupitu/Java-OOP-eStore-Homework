@@ -31,14 +31,15 @@ public class WishList extends ItemList{
 	public Item getLatestAdded(){
 		return latestAdded;
 	}
+	
+	/* Add a new item to the list */
+	public boolean add(Item element){
+		latestAdded = element;
+		return super.add(element);
+	}
 
 	/* Strategy Pattern */
 	public Item executeStrategy(){
 		return strategy.execute(this);
-	}
-	
-	public boolean add(Item element){
-		latestAdded = element;
-		return super.add(element);
 	}
 }

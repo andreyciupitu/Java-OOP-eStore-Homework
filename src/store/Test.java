@@ -8,7 +8,7 @@ import store.department.*;
 import store.items.*;
 import store.strategy.*;
 
-/////////////////////TO DO - implement Strategy Factory, test & rewrite ////////////////////////
+/////////////////////TO DO - implement test & rewrite ////////////////////////
 public class Test {
 
 	public static void main(String[] args) throws Exception{
@@ -73,17 +73,8 @@ public class Test {
 			StringTokenizer tokens = new StringTokenizer(line, ";");
 			String name = tokens.nextToken();
 			double budget = Double.parseDouble(tokens.nextToken());
-			switch (tokens.nextToken()){
-				case "A":
-					store.enter(new Customer(name, budget, new StrategyA()));
-					break;
-				case "B":
-					store.enter(new Customer(name, budget, new StrategyB()));
-					break;
-				case "C":
-					store.enter(new Customer(name, budget, new StrategyC()));
-					break;
-			}
+			StrategyFactory factory = StrategyFactory.getInstance();
+			store.enter(new Customer(name, budget, factory.createStrategy(tokens.nextToken())));
 		}
 		fin.close();
 		

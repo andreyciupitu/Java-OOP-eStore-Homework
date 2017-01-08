@@ -98,7 +98,7 @@ public abstract class Department implements Subject{
 	/* Removes an item from the department */
 	public void removeItem(int itemId){
 		items.remove(itemId);
-		notifyAllObservers(new Notification(new Date(), Notification.NotificationType.REMOVE, itemId, id));		
+		notifyAllObservers(new Notification(new Date(), Notification.NotificationType.REMOVE, itemId, id));
 	}
 	
 	/* Modifies and item in the department */
@@ -127,7 +127,8 @@ public abstract class Department implements Subject{
 	}
 
 	public void notifyAllObservers(Notification n){
-		for (Observer o : subscribers)
+		ArrayList<Observer> clone = new ArrayList<Observer>(subscribers);
+		for (Observer o : clone)
 			o.update(n);
 	}
 

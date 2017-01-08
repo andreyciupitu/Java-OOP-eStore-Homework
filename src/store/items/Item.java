@@ -1,5 +1,7 @@
 package store.items;
 
+import java.text.DecimalFormat;
+
 public class Item{
 	private String name;
 	private Integer id;
@@ -58,14 +60,16 @@ public class Item{
 		if (!(obj instanceof Object))
 			return false;
 		Item item = (Item)obj;
-		return (name.equals(item.name) && id.equals(item.id) && price.equals(item.price));
+		return (name.equals(item.name) && id.equals(item.id));
 	}
 	
 	/* toString method */
 	public String toString(){
-		return name + ";" + id.toString() + ";" + price.toString();
+		DecimalFormat df = new DecimalFormat("#.00");
+		return name + ";" + id.toString() + ";" + df.format(price);
 	}
 	
+	/* Clone method */
 	public Item clone(){
 		return new Item(this.name, this.id, this.price, this.departmentId);
 	}

@@ -240,11 +240,11 @@ public abstract class ItemList{
 	public boolean remove(Item item){
 		if (item == null)
 			return false;
-		length--;
 		ListIterator<Item> it = listIterator();
 		while (it.hasNext())
-			if (it.next().equals(item)){
+			if (it.next().getId().equals(item.getId())){
 				it.remove();
+				length--;
 				return true;
 			}
 		return false;
@@ -284,14 +284,14 @@ public abstract class ItemList{
 	/* Sets the item at the INDEX position to newItem */
 	public void set(int index, Item newItem){
 		ListIterator<Item> it = listIterator();
-		while(it.hasNext()){
+		while(it.hasNext())
 			if (it.nextIndex() == index){
 				it.next();
 				it.set(newItem);
 				return;
 			}
-			it.next();
-		}
+			else
+				it.next();
 	}
 	
 	/* Finds an item by ID */

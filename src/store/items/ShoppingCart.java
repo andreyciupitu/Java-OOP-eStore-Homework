@@ -137,8 +137,6 @@ public class ShoppingCart extends ItemList implements Visitor{
 			if (item.getDepartmentId().equals(d.getId()))
 				discount += item.getPrice();
 		}
-		System.out.println(max);
-		System.out.println(discount);
 		
 		/* Applies discount if the criteria is met */
 		if (discount > max){
