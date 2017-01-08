@@ -283,15 +283,8 @@ public abstract class ItemList{
 	
 	/* Sets the item at the INDEX position to newItem */
 	public void set(int index, Item newItem){
-		ListIterator<Item> it = listIterator();
-		while(it.hasNext())
-			if (it.nextIndex() == index){
-				it.next();
-				it.set(newItem);
-				return;
-			}
-			else
-				it.next();
+		if (remove(index) != null)
+			add(newItem);
 	}
 	
 	/* Finds an item by ID */

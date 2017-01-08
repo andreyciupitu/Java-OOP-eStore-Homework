@@ -11,7 +11,7 @@ import store.interfaces.Visitor;
 public class ShoppingCart extends ItemList implements Visitor{
 	private Double budget;
 	private Double moneyLeft;
-	
+
 	public ShoppingCart(Double budget){
 		super(new Comparator<Item>(){
 
@@ -24,6 +24,15 @@ public class ShoppingCart extends ItemList implements Visitor{
 		});
 		this.budget = budget;
 		this.moneyLeft = budget;
+	}
+
+	/* GETTERS & SETTERS */
+	public Double getBudget() {
+		return budget;
+	}
+
+	public Double getMoneyLeft() {
+		return moneyLeft;
 	}
 	
 	/* Adds an item if it doesn't exceed the budget */
@@ -40,7 +49,7 @@ public class ShoppingCart extends ItemList implements Visitor{
 		double total = 0;
 		for (Item e : c)
 			total += e.getPrice();
-		if (total > budget)
+		if (total > moneyLeft)
 			return false;
 		return super.addAll(c);
 	}
