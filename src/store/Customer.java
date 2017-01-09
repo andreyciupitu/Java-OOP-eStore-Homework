@@ -93,6 +93,8 @@ public class Customer implements Observer{
 				wlist.set(wlist.findItem(n.getItemId()), changedItem.clone());
 				cart.set(cart.findItem(n.getItemId()), changedItem.clone());
 				break;
+			default:
+				break;
 		}
 	}
 	

@@ -7,10 +7,11 @@ import store.items.Item;
 import store.items.WishList;
 
 public class StrategyA implements Strategy{
+	private static final double BIG = 10000000;
 	
 	/* Obtain the cheapest item in the WishList */
 	public Item execute(WishList wlist){
-		double min = 10000000;
+		double min = BIG;
 		Item minItem = null;
 		
 		/* Find the item with the lowest price */
