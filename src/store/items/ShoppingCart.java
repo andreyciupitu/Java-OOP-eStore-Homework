@@ -162,7 +162,7 @@ public class ShoppingCart extends ItemList implements Visitor{
 		}
 		
 		/* Calculates the remaining budget */
-		budget *= 1.05;
+		budget += 0.05 * discount;
 		moneyLeft = budget - getTotalPrice();	
 	}
 }
