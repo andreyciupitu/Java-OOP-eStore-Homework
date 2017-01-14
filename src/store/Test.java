@@ -6,7 +6,6 @@ import java.util.StringTokenizer;
 import store.department.*;
 import store.items.*;
 
-/////////////////////FIXME - fix last test ////////////////////////
 public class Test {
 
 	public static void main(String[] args) throws Exception{
@@ -43,7 +42,6 @@ public class Test {
 					
 					/* Find the item in the store */
 					element = store.getItem(itemId);
-					
 					list = tokens.nextToken();
 					
 					/* Find the Customer */

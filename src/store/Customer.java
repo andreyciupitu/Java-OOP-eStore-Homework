@@ -20,6 +20,7 @@ public class Customer implements Observer{
 		this.cart = store.getShoppingCart(budget);
 		this.wlist = new WishList(strategy);
 		this.notifications = new ArrayList<Notification>();
+		store.enter(this);
 	}
 	
 	/* GETTERS & SETTERS */
@@ -29,6 +30,10 @@ public class Customer implements Observer{
 
 	public ShoppingCart getCart(){
 		return cart;
+	}
+	
+	public void setCart(ShoppingCart cart){
+		this.cart = cart;
 	}
 
 	public WishList getWlist(){
@@ -50,6 +55,8 @@ public class Customer implements Observer{
 	
 	/* Add an element to the ShoppingCart */
 	public boolean addToCart(Item item){
+		if (item == null)
+			return false;
 		return cart.add(item);
 	}
 	

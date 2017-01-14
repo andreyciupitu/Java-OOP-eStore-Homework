@@ -19,6 +19,7 @@ public class Notification{
 		this.itemId = itemId;
 	}
 
+	/* GETTERS & SETTERS */
 	public Date getDate(){
 		return date;
 	}
@@ -35,6 +36,7 @@ public class Notification{
 		return itemId;
 	}
 	
+	/* toString method */
 	public String toString(){
 		return type.toString() + ";" + itemId + ";" + departmentId;
 	}
