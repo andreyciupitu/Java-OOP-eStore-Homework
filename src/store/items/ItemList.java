@@ -152,6 +152,10 @@ public abstract class ItemList{
 		return length;
 	}
 	
+	public Comparator<Item> getComparator(){
+		return comp;
+	}
+	
 	/* Adds an item to the list, in correct position */
 	public boolean add(Item element){
 		Node<Item> aux = head;

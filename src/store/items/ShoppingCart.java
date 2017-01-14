@@ -11,6 +11,7 @@ import store.interfaces.Visitor;
 public class ShoppingCart extends ItemList implements Visitor{
 	private Double budget;
 	private Double moneyLeft;
+	private static final double BIG = 10000000;
 
 	public ShoppingCart(Double budget){
 		super(new Comparator<Item>(){
@@ -70,6 +71,7 @@ public class ShoppingCart extends ItemList implements Visitor{
 		return success;
 	}
 	
+	/* Visitor Pattern */
 	public void visit(Department d){
 		d.accept(this);
 	}
@@ -89,8 +91,8 @@ public class ShoppingCart extends ItemList implements Visitor{
 
 	/* Applies the Music Department discount */
 	public void visit(MusicDepartment d){
-		ListIterator<Item> it = listIterator();
 		double discount = 0;
+		ListIterator<Item> it = listIterator();
 		
 		/* Finds the total price of the Music items
 		 * in the Shopping Cart */
@@ -107,7 +109,7 @@ public class ShoppingCart extends ItemList implements Visitor{
 
 	/* Adds the Software discount, if applicable */
 	public void visit(SoftwareDepartment d){
-		double min = 10000000;
+		double min = BIG;
 		
 		/*Finds the cheapest Software item */
 		for (Map.Entry<Integer, Item> entry : d.getItems().entrySet())
@@ -160,7 +162,7 @@ public class ShoppingCart extends ItemList implements Visitor{
 		}
 		
 		/* Calculates the remaining budget */
-		budget *= 1.05;
+		budget += 0.05 * discount;
 		moneyLeft = budget - getTotalPrice();	
 	}
 }

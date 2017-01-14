@@ -57,7 +57,7 @@ public class Item{
 
 	/* Equals method */
 	public boolean equals(Object obj){
-		if (!(obj instanceof Object))
+		if (!(obj instanceof Item))
 			return false;
 		Item item = (Item)obj;
 		return (name.equals(item.name) && id.equals(item.id));

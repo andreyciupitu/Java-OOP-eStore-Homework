@@ -1,87 +1,30 @@
 package store;
 
 import java.io.*;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.StringTokenizer;
 import store.department.*;
 import store.items.*;
-import store.strategy.*;
 
-/////////////////////TO DO - implement test & rewrite ////////////////////////
 public class Test {
 
 	public static void main(String[] args) throws Exception{
 		BufferedReader fin;
 		PrintWriter fout;
-		String line;
 		
 		/* Obtain the store instance */
 		Store store = Store.getInstance();
 		
 		/* Read the store data */
-		fin = new BufferedReader(new FileReader("input\\store.txt"));
-		
-		/* Read the store name */
-		store.setName(fin.readLine());
-		
-		/* Read the data & build the departments */
-		while ((line = fin.readLine()) != null){
-			StringTokenizer tokens = new StringTokenizer(line, ";"); 
-			HashMap<Integer, Item> items = new HashMap<Integer, Item>();
-			
-			/* Read department name & ID */
-			String name = tokens.nextToken();
-			int departmentId = Integer.parseInt(tokens.nextToken());
-			Department.DepartmentBuilder builder = new Department.DepartmentBuilder(name, departmentId);
-			
-			/* Read the items belonging in this department */
-			int count = Integer.parseInt(fin.readLine());
-			for (int i = 0; i < count; i++){
-				tokens = new StringTokenizer(fin.readLine(), ";");
-				Item item = new Item(tokens.nextToken(), new Integer(tokens.nextToken()),
-						new Double(tokens.nextToken()), departmentId);
-				items.put(item.getId(), item);
-			}
-			builder.initItems(items);
-			
-			/* Build the department */
-			switch (name){
-				case "BookDepartment":
-					store.addDepartment(builder.build(DepartmentFactory.DepartmentType.BOOK));
-					break;
-				case "MusicDepartment":
-					store.addDepartment(builder.build(DepartmentFactory.DepartmentType.MUSIC));
-					break;
-				case "SoftwareDepartment":
-					store.addDepartment(builder.build(DepartmentFactory.DepartmentType.SOFTWARE));
-					break;
-				case "VideoDepartment":
-					store.addDepartment(builder.build(DepartmentFactory.DepartmentType.VIDEO));
-					break;
-				default:
-					break;
-			}
-		}
-		fin.close();
+		store.loadDepartments("input\\store.txt");
 		
 		/* Read the Customer data */
-		fin = new BufferedReader(new FileReader("input\\customers.txt"));
-		int count = Integer.parseInt(fin.readLine());
-		for (int i = 0; i < count; i++){
-			line = fin.readLine();
-			StringTokenizer tokens = new StringTokenizer(line, ";");
-			String name = tokens.nextToken();
-			double budget = Double.parseDouble(tokens.nextToken());
-			StrategyFactory factory = StrategyFactory.getInstance();
-			store.enter(new Customer(name, budget, factory.createStrategy(tokens.nextToken())));
-		}
-		fin.close();
+		store.loadCustomers("input\\customers.txt");
 		
 		/* Read & handle the events */
 		fin = new BufferedReader(new FileReader("input\\events.txt"));
 		fout = new PrintWriter(new FileWriter("result.txt"));
-		count = Integer.parseInt(fin.readLine());
+		int count = Integer.parseInt(fin.readLine());
 		for (int i = 0; i < count; i++){
 			int depId, itemId;
 			double price;
@@ -99,7 +42,6 @@ public class Test {
 					
 					/* Find the item in the store */
 					element = store.getItem(itemId);
-					
 					list = tokens.nextToken();
 					
 					/* Find the Customer */
@@ -201,6 +143,8 @@ public class Test {
 				case "getNotifications":
 					client = store.getCustomers().get(tokens.nextToken());
 					fout.println(client.getNotifications());
+					break;
+				default:
 					break;
 			}
 		}
