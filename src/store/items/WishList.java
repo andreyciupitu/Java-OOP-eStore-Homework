@@ -37,6 +37,13 @@ public class WishList extends ItemList{
 		latestAdded = element;
 		return super.add(element);
 	}
+	
+	/* Remove from List */
+	public boolean remove(Item item){
+		if (latestAdded.equals(item))
+			latestAdded = null;
+		return super.remove(item);
+	}
 
 	/* Strategy Pattern */
 	public Item executeStrategy(){
